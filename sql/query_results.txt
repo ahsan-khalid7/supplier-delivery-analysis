@@ -1,0 +1,49 @@
+### Q1 — On-time % by supplier (worst first)
+
+        supplier_name       region  delivered_orders  on_time_pct  avg_delay_days
+    BlueBox Logistics       Kuwait               276         48.6            0.52
+ Coastal Cold Storage        India               272         49.3            0.81
+   Metro Distribution Saudi Arabia               232         50.9            0.36
+Delta Plastics & Film          UAE               248         51.6            0.33
+      Alpine Dairy Co       Kuwait               270         53.7            0.42
+
+
+### Q2b — Worst supplier per region (window function RANK)
+
+          supplier_name       region  orders  on_time_pct  worst_in_region_rank
+      BlueBox Logistics       Kuwait     276         48.6                     1
+   Coastal Cold Storage        India     272         49.3                     1
+     Metro Distribution Saudi Arabia     232         50.9                     1
+  Delta Plastics & Film          UAE     248         51.6                     1
+Nordic Freight Partners        Qatar     282         58.5                     1
+
+
+### Q3 — Monthly spend + 3-month moving avg on-time % (window function)
+
+order_month  orders   spend_usd  on_time_pct  on_time_pct_3mo_avg
+    2025-01     168  9004352.15         61.3                 61.3
+    2025-02     159  8949930.38         54.7                 58.0
+    2025-03     209 12109866.36         56.5                 57.5
+    2025-04     180  9812590.42         52.2                 54.5
+    2025-05     174  8977478.45         60.3                 56.3
+    2025-06     188 10446706.75         53.2                 55.3
+
+
+### Q4 — High-value late orders (>$10k), most expensive first
+
+ order_id         supplier_name        product_name order_date  delay_days  order_value_usd
+PO-102127 Delta Plastics & Film Grain & Cereal Base 2025-10-28         1.0        223441.92
+PO-100621 Delta Plastics & Film  Corrugated Cartons 2025-07-18         5.0        210464.72
+PO-100470    Metro Distribution  Cold Chain Pallets 2025-06-24         3.0        208811.44
+PO-101862    Metro Distribution Grain & Cereal Base 2026-03-27         1.0        207706.88
+PO-102025     BlueBox Logistics      Dairy Base Mix 2026-04-11         2.0        206688.30
+
+
+### Q5 — Category-level lead time gap vs. promise
+
+           category  delivered_orders  avg_promised_days  avg_actual_days  avg_gap_days
+          Additives               380               8.45             8.92          0.47
+          Packaging               796               8.47             8.79          0.32
+Logistics Equipment               395               8.45             8.57          0.13
+       Raw Material              1541               8.43             8.46          0.03
+
